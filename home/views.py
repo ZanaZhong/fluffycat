@@ -59,15 +59,18 @@ def register(request):
             email = register_form.cleaned_data['email']
             address = register_form.cleaned_data['address']
             sex = register_form.cleaned_data['sex']
-            if password != checkpassword: #若兩次密碼不同
+            #若兩次密碼不同
+            if password != checkpassword: 
                 message = "兩次輸入的密碼不同!"
                 return render(request, 'registration/register.html', locals())
             else:
-                same_name_user = Member.objects.filter(name=username) #比對資料庫是否有相同用戶名
+                #比對資料庫是否有相同用戶名
+                same_name_user = Member.objects.filter(name=username) 
                 if same_name_user:
                     message = "該用戶名稱已存在!"
-                    return render(request, 'registration/register.html', locals())
-                same_email_user = Member.objects.filter(email=email)  #比對資料庫是否有相同信箱
+                    return render(request, 'registration/register.html', locals()) 
+                #比對資料庫是否有相同信箱
+                same_email_user = Member.objects.filter(email=email) 
                 if same_email_user:
                     message = "信箱已被使用!"
                     return render(request, 'registration/register.html', locals())
@@ -79,7 +82,8 @@ def register(request):
                 new_user.address = address
                 new_user.sex = sex
                 new_user.save()
-                #自動跳轉到登入頁面
-                return render(request, "registration/login.html")
+                #自動跳轉到登入頁面 -> 會怪怪的 改跳回首頁好了
+                # return render(request, "registration/login.html")
+                return redirect('/')
     register_form = RegisterForm(request.POST)
     return render(request, 'registration/register.html', locals())
