@@ -14,7 +14,7 @@ def hash_code(s, salt='ivan'): #密碼加密
 
 def login(request):
     #檢查session確定是否登入，不允許重複登入
-    if request.session.get('is_login',None): 
+    if request.session.get('is_login', None): 
         #若已登入則導向主頁
         return redirect('/')
         
@@ -36,10 +36,10 @@ def login(request):
                     message = "密碼不正確"
             except:
                 message = "該用戶不存在"
-    login_form = AccountForm(request.POST) #返回空表單
+    login_form = AccountForm() #返回空表單
     # 為了彈入視窗改
     # return render(request,"pet/index.html",locals())
-    return render(request,"registration/login.html",locals())
+    return render(request,"registration/login.html", locals())
 
 def logout(request):
     if not request.session.get('is_login', None): #如果原本未登入，就不需要登出
@@ -81,8 +81,6 @@ def register(request):
                 new_user.address = address
                 new_user.sex = sex
                 new_user.save()
-                #自動跳轉到登入頁面 -> 會怪怪的 改跳回首頁好了
-                # return render(request, "registration/login.html")
-                return redirect('/')
+                return redirect('/account/login')
     register_form = RegisterForm(request.POST)
     return render(request, 'registration/register.html', locals())
