@@ -1,0 +1,15 @@
+html ,body, .container {
+    height: 100%;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  background: linear-gradient(120deg, #9af5f5 0%, #ffb586 100%);
+  margin: auto 80px;
+}
+
+/*.flex-center {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}*/

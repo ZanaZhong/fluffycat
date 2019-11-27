@@ -1,44 +1,65 @@
-{% extends "base.html" %}
-{% block title %}<title>註冊會員</title>{% endblock %}
-{% block content %}
-<div class="container">
-    <div class="col-md-4 col-md-offset-4">
-        <!-- <form class="form-register" action="/register/" method="POST"> -->
-            <form class="form-register" action="{% url 'account:register' %}" method="POST">
-            {% if message %}
-                <div class="alert alert-warning">{{ message }}</div>
-            {% endif %}
-            {% csrf_token %}
-            <h2>歡迎註冊!</h2>
-            <div class="form-group">
-                {{ register_form.username.label_tag }}
-                {{ register_form.username }}
-            </div>
-            <div class="form-group">
-                {{ register_form.password.label_tag }}
-                {{ register_form.password }}
-            </div>
-            <div class="form-group">
-                {{ register_form.checkpassword.label_tag }}
-                {{ register_form.checkpassword }}
-            </div>
-            <div class="form-group">
-                {{ register_form.email.label_tag }}
-                {{ register_form.email }}
-            </div>
-            <div class="form-group">
-                {{ register_form.address.label_tag }}
-                {{ register_form.address }}
-            </div>
-            <div class="form-group">
-                {{ register_form.sex.label_tag }}
-                {{ register_form.sex }}
-            </div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>註冊會員</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  {% load staticfiles %} 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/loginOutlook.css' %}">
+</head>
+<body>
+  <a href="{% url 'home:index'%}">〈 返回</a>
+  <div class="container d-flex flex-column justify-content-center">
+    <div class="row align-items-center ">
+      <div class="col-lg-6 col-md-12 col-sm-10 col-md-offset-0 align-self-center">
+        <form class="form-register" action="{% url 'account:register' %}" method="POST">
+          {% if message %}
+          <div class="alert alert-warning">{{ message }}</div>
+          {% endif %}
+          {% csrf_token %}
+          <div class="form-group">
+            {{ register_form.username.label_tag }}
+            {{ register_form.username }}
+          </div>
+          <div class="form-group">
+            {{ register_form.password.label_tag }}
+            {{ register_form.password }}
+          </div>
+          <div class="form-group">
+            {{ register_form.checkpassword.label_tag }}
+            {{ register_form.checkpassword }}
+          </div>
+          <div class="form-group">
+            {{ register_form.email.label_tag }}
+            {{ register_form.email }}
+          </div>
+          <div class="form-group">
+            {{ register_form.address.label_tag }}
+            {{ register_form.address }}
+          </div>
+          <div class="form-group">
+            {{ register_form.sex.label_tag }}
+            {{ register_form.sex }}
+          </div>
 
-            <button type="reset" class="btn btn-default pull-left">重設</button>
-            <button type="submit" class="btn btn-primary pull-right">送出</button>
+          <button type="reset" class="btn btn-default pull-left">重設</button>
+          <button type="submit" class="btn btn-primary pull-right">送出</button>
         </form>
+      </div>
+      <div class="col-lg-6  col-md-12">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-7">
+            <div class="row justify-content-end">
+              <div class="col-lg-10 col-lg-offset-7 col-md-12 col-md-offset-7" style="border-left: 1px solid white;">
+                <span class="">
+                  HELLO , FRIEND !<br>
+                  <span class="cardtext2" style="font-size:40px;">Join Us Now !</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-
-{% endblock %}
+  </div>
+</body>
+</html>
