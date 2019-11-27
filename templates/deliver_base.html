@@ -1,30 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
+<html>
+  <head>
   <title>{% block title %} {% endblock %}</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  {% load staticfiles %} 
-  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-  <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+  <!-- {% load staticfiles %} 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"> -->
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <!-- <script type="text/javascript" src="{% static 'js/login.js' %}"></script> -->
-  <!-- <script>
-  function loadDoc() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("modal-content").innerHTML = this.responseText;
-      }
-    };
-    xhttp.open("GET", "{% url 'account:login' %}", true);
-    xhttp.send();
-  }
-</script> -->
 </head>
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-light align-items-end flex-column">
+  <nav class="navbar navbar-expand-sm navbar-light bg-light align-items-end flex-column">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,10 +33,6 @@
               <a class="dropdown-item" href="{% url 'account:logout'%}">登出</a>
             </div>
           </li>
-          
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="{% url 'account:logout'%}">登出</a>
-          </li> -->
         {% else %}
           <li class="nav-item">
             <a class="nav-link login-link" href="{% url 'account:login'%}">登入</a>
@@ -65,7 +46,7 @@
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">我要送養</a>
           <div class="dropdown-menu">
             <a href="#" class="dropdown-item">Drafts</a>
-            <a href="{% url 'home:uploadAnimal'%}" class="dropdown-item">上傳動物</a>
+            <a href="#" class="dropdown-item">上傳動物</a>
             <div class="dropdown-divider"></div>
             <a href="#"class="dropdown-item">送養清單</a>
           </div>
@@ -74,40 +55,7 @@
     </div>
     <a class="navbar-brand mx-auto" href="{% url 'home:index' %}" style="font-size: 40px; margin-bottom: 10px;">炫砲貓</a>
   </nav>
-
-  <!-- <div class="modal fade" id="login-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">歡迎登入</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form class="form-login" action="/login/" method="POST">
-              {% if message %}
-              <div class="alert alert-warning">{{message}}</div>
-              {% endif %}
-              {% csrf_token %}
-              <div class="form-group">
-                  {{ login_form.username.label_tag }}
-                  {{ login_form.username }}
-              </div>
-              <div class="form-group">
-                  {{ login_form.password.label_tag }}
-                  {{ login_form.password }}
-              </div>
-              <button type="reset" class="btn btn-default pull-left">重設</button>
-              <button type="submit" class="btn btn-primary pull-right">登入</button>
-
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
+  
   {% block content %}
   {% endblock %}
   <footer class="container-fluid text-center">
@@ -116,5 +64,6 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>
