@@ -8,6 +8,34 @@ body {
   margin: auto 80px;
 }
 
+.right-card{
+    padding-left: 30px;
+    border-left: 1px solid white;
+}
+
+.input-field {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.input-field label{
+  color: gray;
+  margin: 0;
+}
+
+.input-field input[type=text], input[type=password] {
+  background-color: transparent;
+  border: none;
+
+  border-bottom: 1px solid white !important;
+  box-shadow: 0 0px 0 0 white !important;
+  color:#6a6f77;
+  outline:0;
+}
+
+input:focus{
+  border:1px solid #ff7496;
+}
 /*.flex-center {
     display:flex;
     align-items:center;
