@@ -10,8 +10,8 @@
             {% csrf_token %}
             <h1>歡迎登入!</h1>
             <div class="form-group">
-                {{ login_form.username.label_tag }} <!-- 由forms.py自動生成 -->
-                {{ login_form.username }}
+                {{ login_form.useraccount.label_tag }} <!-- 由forms.py自動生成 -->
+                {{ login_form.useraccount }}
             </div>
             <div class="form-group">
                 {{ login_form.password.label_tag }}

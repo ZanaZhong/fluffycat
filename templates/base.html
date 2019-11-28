@@ -85,7 +85,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="form-login" action="/login/" method="POST">
+          <form class="form-login" action="{% url 'account:login' %}" method="POST">
               {% if message %}
               <div class="alert alert-warning">{{message}}</div>
               {% endif %}
