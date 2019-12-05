@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Account
-from .forms import AccountForm, RegisterForm
+from .forms import AccountForm, RegisterForm, PasswordForm
 # Create your views here.
 
 #1123
@@ -15,6 +15,8 @@ def hash_code(s, salt='ivan'): #密碼加密
 def login(request):
     #檢查session確定是否登入，不允許重複登入
     if request.session.get('is_login', None): 
+        # nothing happened @@ <- set_expiry
+        request.session.set_expiry(0)
         #若已登入則導向主頁
         return redirect('/')
         
@@ -29,7 +31,7 @@ def login(request):
                     #使用session寫入登入者資料
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
-                    # request.session['user_account'] = user.account
+                    request.session['user_account'] = user.account
                     request.session['user_name'] = user.name
                     message = "登入成功"
                     return redirect('/')
@@ -41,6 +43,36 @@ def login(request):
     # 為了彈入視窗改
     # return render(request,"pet/index.html",locals())
     return render(request,"registration/login.html", locals())
+
+def setpassword(request):
+    #檢查session確定是否登入，不允許重複登入
+    if request.session.get('is_login', None):
+        if request.method == 'POST':  
+            set_pwd_form = PasswordForm(request.POST)
+            if set_pwd_form.is_valid():
+                enterpwd = set_pwd_form.cleaned_data['oldpassword'] 
+                newpwd = set_pwd_form.cleaned_data['newpassword']
+                checknewpwd = set_pwd_form.cleaned_data['checknewpassword']
+
+                user = Account.objects.get(account=request.session['user_account'])
+                old_pwd = user.password
+                
+                #若輸入的舊密碼不相符
+                if hash_code(enterpwd) != old_pwd :
+                    message = hash_code(enterpwd)
+                    return render(request, 'registration/setpwd.html', locals())
+                else :
+                    if newpwd != checknewpwd: 
+                        message = "兩次輸入的密碼不同!"
+                        return render(request, 'registration/setpwd.html', locals())
+                    user.password = hash_code(newpwd)
+                    user.save()
+                    message = "修改成功"
+                    return redirect('/')
+        set_pwd_form = PasswordForm()
+        return render(request, 'registration/setpwd.html', locals())
+    else:
+        return redirect('/account/login') 
 
 def logout(request):
     if not request.session.get('is_login', None): #如果原本未登入，就不需要登出

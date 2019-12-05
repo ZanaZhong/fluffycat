@@ -4,17 +4,20 @@ from .forms import UploadForm
 from .models import Pet
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+# @login_required
 # Create your views here.
 def index(request):
     return render(request, 'pet/index.html')
-
+# @login_required
 def uploadAnimal(request):
     if request.session.get('is_login', None): 
         if request.method == 'POST':
             upload_form = UploadForm(request.POST or None, request.FILES)
+            print(upload_form.is_valid())
             if upload_form.is_valid():
-                chip_num = upload_form.cleaned_data['chip_num'] 
+                # chip_num = upload_form.cleaned_data['chip_num'] 
                 # animal_type = upload_form.cleaned_data['animal_type']
                 # breed = upload_form.cleaned_data['breed']
                 # age = upload_form.cleaned_data['age']
@@ -23,6 +26,7 @@ def uploadAnimal(request):
                 # health = upload_form.cleaned_data['health']
                 # note = upload_form.cleaned_data['note']
                 # photo = upload_form.cleaned_data['photo']
+                print(animal_type)
                 
                 same_chip_num = Pet.objects.filter(chip_num=chip_num) 
                 if chip_num == same_chip_num:

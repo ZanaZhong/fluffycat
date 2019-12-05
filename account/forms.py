@@ -18,3 +18,10 @@ class RegisterForm(forms.Form):
     address = forms.CharField(label="地址", max_length=150, widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(label = "信箱", max_length=256, widget=forms.EmailInput(attrs={'class':'form-control'}))
     sex = forms.ChoiceField(label = "性別",choices=gender)
+
+class PasswordForm(forms.Form):
+    oldpassword = forms.CharField(label="舊密碼", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    newpassword = forms.CharField(label="新密碼", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    checknewpassword = forms.CharField(label="確認新密碼", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+        

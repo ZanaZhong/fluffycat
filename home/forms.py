@@ -9,13 +9,24 @@ class UploadForm(forms.ModelForm):
         model = Pet
         # 使用 Model 的哪些欄位
         fields = '__all__'
+        # fields = {
+        #     'animal_type',
+        #     'chip_num',
+        #     'sex',
+        #     'age',
+        #     'breed',
+        #     'location',
+        #     'health',
+        #     'note',
+        # }
+
         # 新增 labels 對應
         labels = {
             'animal_type':_('種類'),
             'chip_num':_('晶片號碼'),
             'sex':_('性別'),
             'age':_('年紀'),
-            # 'size':_('體型'),
+            'breed':_('品種'),
             # 'color':_('毛色'),
             'location':_('來源地'),
             # 'neuter':_('有無結紮'),
