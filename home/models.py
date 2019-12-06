@@ -1,7 +1,34 @@
 from django.db import models
 from django.contrib import admin
 from django.urls import reverse
+
 # Create your models here.
+class Shelter(models.Model):
+    Name = models.CharField('名字', max_length=20, blank=True)
+    Sex = models.CharField('性別', max_length=20, blank=True)
+    Type = models.CharField('種類', max_length=20, blank=True)
+    Build = models.CharField('體型', max_length=20, default='')
+    Age = models.CharField('年紀', max_length=20, blank=True)
+    Variety = models.CharField('品種', max_length=20, blank=True)
+    Reason = models.CharField('理由', max_length=20, blank=True)
+    AcceptNum = models.CharField('什麼', max_length=20, blank=True)
+    ChipNum = models.CharField('晶片號碼', max_length=20, blank=True)
+    IsSterilization = models.CharField('是否有結紮', max_length=20, blank=True)
+    HairType = models.CharField('毛色', max_length=20, default='')
+    Note = models.TextField('備註', blank=True)
+    Resettlement = models.CharField('收容所編號', max_length=30, blank=True)
+    Phone = models.CharField('電話', max_length=20, blank=True)
+    Email = models.EmailField('信箱', blank=True)
+    ChildreAnlong = models.CharField('不知道1', max_length=20, blank=True)
+    AnimalAnlong = models.CharField('不知道2', max_length=20, blank=True)
+    Bodyweight = models.CharField('體重', max_length=20, blank=True)
+    ImageName = models.ImageField(upload_to = 'pet/')
+    
+    def __unicode__(self):
+        return self.id
+@admin.register(Shelter)
+class ShelterAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Shelter._meta.fields]
 
 class Pet(models.Model):
     pet_status_choice = (
@@ -51,9 +78,9 @@ class Pet(models.Model):
     # pet_publisher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='previous_owner',default='')
     # pet_name = models.CharField('寵物名', max_length=30, default='')
     
-    chip_num = models.CharField('晶片號碼', max_length=20, blank=True)
+    chipNum = models.CharField('晶片號碼', max_length=20, blank=True)
     # neuter = models.BooleanField('是否有結紮', choices=neuter_choice, default=False)
-    animal_type = models.IntegerField('種類', choices=animal_type_choice, default=0)
+    animalType = models.IntegerField('種類', choices=animal_type_choice, default=0)
     breed = models.CharField('品種', max_length=20, default='')
     age = models.IntegerField('年紀', choices=age_choice, default=0)
     sex = models.CharField('性別',max_length=32,choices=sex_choice, default="公")
@@ -63,6 +90,7 @@ class Pet(models.Model):
     photo = models.ImageField(upload_to='pet', null=True)
     state = models.IntegerField('領養狀態', choices=pet_status_choice, default=0)
     ctime = models.DateTimeField(auto_now_add=True)
+    petOwner = models.CharField('送養人', max_length=20)
 
     # def __unicode__(self):
     #     return self.ctime

@@ -12,7 +12,7 @@ import requests
 def index(request):
     return render(request, 'pet/index.html')
 
-@login_required
+# @login_required
 def uploadAnimal(request):
     if request.session.get('is_login', None): 
         if request.method == 'POST':
@@ -20,16 +20,16 @@ def uploadAnimal(request):
             print(upload_form.errors)
             print(upload_form.is_valid())
             if upload_form.is_valid():
-                # chip_num = upload_form.cleaned_data['chip_num'] 
-                # animal_type = upload_form.cleaned_data['animal_type']
-                # breed = upload_form.cleaned_data['breed']
-                # age = upload_form.cleaned_data['age']
-                # sex = upload_form.cleaned_data['sex']
-                # location = upload_form.cleaned_data['sex']
-                # health = upload_form.cleaned_data['health']
-                # note = upload_form.cleaned_data['note']
-                # photo = upload_form.cleaned_data['photo']
-                print(animal_type)
+                chipNum = upload_form.cleaned_data['chipNum'] 
+                animalType = upload_form.cleaned_data['animalType']
+                breed = upload_form.cleaned_data['breed']
+                age = upload_form.cleaned_data['age']
+                sex = upload_form.cleaned_data['sex']
+                location = upload_form.cleaned_data['sex']
+                health = upload_form.cleaned_data['health']
+                note = upload_form.cleaned_data['note']
+                photo = upload_form.cleaned_data['photo']
+                # print(animal_type)
                 
                 same_chip_num = Pet.objects.filter(chip_num=chip_num) 
                 if chip_num == same_chip_num:
