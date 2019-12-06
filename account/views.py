@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Account
 from .forms import AccountForm, RegisterForm, PasswordForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 #1123
@@ -72,8 +73,7 @@ def setpassword(request):
         set_pwd_form = PasswordForm()
         return render(request, 'registration/setpwd.html', locals())
     else:
-        return redirect('/account/login') 
-
+        return redirect('/account/login')
 def logout(request):
     if not request.session.get('is_login', None): #如果原本未登入，就不需要登出
         return redirect('/')

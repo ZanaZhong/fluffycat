@@ -5,16 +5,19 @@ from .models import Pet
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+import json, os, sys
+import requests
 
-# @login_required
 # Create your views here.
 def index(request):
     return render(request, 'pet/index.html')
-# @login_required
+
+@login_required
 def uploadAnimal(request):
     if request.session.get('is_login', None): 
         if request.method == 'POST':
             upload_form = UploadForm(request.POST or None, request.FILES)
+            print(upload_form.errors)
             print(upload_form.is_valid())
             if upload_form.is_valid():
                 # chip_num = upload_form.cleaned_data['chip_num'] 
@@ -56,3 +59,4 @@ def uploadAnimal(request):
 def detailAnimal(request, id): #顯示寵物細節,已領養 或 登入者就是寵物擁有者時,沒有領養按鈕
     pet = get_object_or_404(Pet, id=id)
     return render(request, 'pet/detailAnimal.html', locals())
+
