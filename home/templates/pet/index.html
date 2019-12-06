@@ -54,7 +54,7 @@
   {{ errormsg }}<br>
   <div class="row">
     {% for pet in pet.all %}
-    <div class="card">
+    <!-- <div class="card">
       <div class="card-header">
         #
       </div>
@@ -69,13 +69,13 @@
         <a href="#" class="btn btn-primary">Detail</a>
       </div>
     </div>
-
+ -->
 
     <div class="card">
       <div class="card-header">
         #
       </div>
-      <div style="height:13rem; margin: auto;">
+      <div style="height:12rem; margin: auto;">
         <img src="{{ pet.photo.url}}" class=" " alt="..." style="height: inherit; ">
       </div>
       <div class="card-body">
