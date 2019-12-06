@@ -3,81 +3,91 @@
 {% block content %}
 <!-- {% load staticfiles %}  -->
 <div class="jumbotron">
-      <div class="container text-center">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-          <label class="form-check-label" for="inlineRadio1">狗狗</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-          <label class="form-check-label" for="inlineRadio2">貓貓</label>
-        </div>
-        <select class="mdb-select" searchable="Search here..">
-          <option value="1" disabled selected>Choose your option</option>
-          <option value="2">example 1</option>
-          <option value="3">example 2</option>
-          <option value="4">example 4</option>
-        </select>
+  <div class="container text-center">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+      <label class="form-check-label" for="inlineRadio1">狗狗</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+      <label class="form-check-label" for="inlineRadio2">貓貓</label>
+    </div>
+    <select class="mdb-select" searchable="Search here..">
+      <option value="1" disabled selected>Choose your option</option>
+      <option value="2">example 1</option>
+      <option value="3">example 2</option>
+      <option value="4">example 4</option>
+    </select>
+  </div>
+</div>
+
+<div class="container-fluid bg-3 text-center" style="padding: 0px 50px 0px 50px;"> 
+  <h3>Some of my Work</h3><br>
+  <div class="row">
+    <div class="card col-sm-3" style="width: 18rem;">
+      <img src="{% static 'img/pearl.png' %}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    <div class="card col-sm-3" style="width: 18rem;">
+      <img src="https://placehold.it/150x80?text=IMAGE" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    <div class="card col-sm-3" style="width: 18rem;">
+      <img src="https://placehold.it/150x80?text=IMAGE" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div><br>
+<div class="container-fluid bg-3" style="padding: 0px 50px 0px 50px;"> 
+  {{ errormsg }}<br>
+  <div class="row">
+    {% for pet in pet.all %}
+    <div class="card">
+      <div class="card-header">
+        #
+      </div>
+      <div style="height:13rem;">
+        <img src="{{ pet.photo.url}}" class="card-img-top" alt="..." style="height: inherit;">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p>品種: {{pet.breed}} </p>
+        <p>性別: {{pet.get_sex_display}} </p>
+        <p>所在地: {{pet.get_location_display}}</p>
+        <a href="#" class="btn btn-primary">Detail</a>
       </div>
     </div>
 
-    <div class="container-fluid bg-3 text-center"> 
-      <h3>Some of my Work</h3><br>
-      <div class="row">
-        <div class="card col-sm-3" style="width: 18rem;">
-          <img src="{% static 'img/pearl.png' %}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card col-sm-3" style="width: 18rem;">
-          <img src="https://placehold.it/150x80?text=IMAGE" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card col-sm-3" style="width: 18rem;">
-          <img src="https://placehold.it/150x80?text=IMAGE" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-        <div class="card col-sm-3" style="width: 18rem;">
-          <img src="https://placehold.it/150x80?text=IMAGE" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-    </div><br>
 
-    <div class="container-fluid bg-3 text-center">
-      <div class="row">
-        <div class="col-sm-3">
-          <p>Some text..</p>
-          <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        </div>
-        <div class="col-sm-3"> 
-          <p>Some text..</p>
-          <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        </div>
-        <div class="col-sm-3"> 
-          <p>Some text..</p>
-          <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        </div>
-        <div class="col-sm-3">
-          <p>Some text..</p>
-          <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-        </div>
+    <div class="card">
+      <div class="card-header">
+        #
       </div>
-      
-    </div><br><br>
+      <div style="height:13rem; margin: auto;">
+        <img src="{{ pet.photo.url}}" class=" " alt="..." style="height: inherit; ">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p>品種: {{pet.breed}} </p>
+        <p>性別: {{pet.get_sex_display}} </p>
+        <p>所在地: {{pet.get_location_display}}</p>
+        <a href="#" class="btn btn-primary">Detail</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
 {% endblock %}
