@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import UploadForm
-from .models import Pet
+from .models import Pet, Shelter
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -52,52 +52,52 @@ def uploadAnimal(request):
     else:
         return redirect('/account/login') 
 
-# # @login_required
-# def uploadAnimal(request):
-#     if request.session.get('is_login', None): 
-#         if request.method == 'POST':
-#             upload_form = UploadForm(request.POST or None, request.FILES)
-#             print(upload_form.errors)
-#             print(upload_form.is_valid())
-#             if upload_form.is_valid():
-#                 chipNum = upload_form.cleaned_data['chipNum'] 
-#                 animalType = upload_form.cleaned_data['animalType']
-#                 breed = upload_form.cleaned_data['breed']
-#                 age = upload_form.cleaned_data['age']
-#                 sex = upload_form.cleaned_data['sex']
-#                 location = upload_form.cleaned_data['sex']
-#                 health = upload_form.cleaned_data['health']
-#                 note = upload_form.cleaned_data['note']
-#                 photo = upload_form.cleaned_data['photo']
-#                 # print(animal_type)
-                
-#                 same_chip_num = Pet.objects.filter(chip_num=chip_num) 
-#                 if chip_num == same_chip_num:
-#                     message = "晶片號碼重複"
-#                     return render(request, 'pet/uploadAnimal.html', locals())
-#                 else:
-#                     image_file = request.FILES['photo']
-#                     Pet = upload_form.save(commit=False)
-#                     Pet.photo = image_file
-#                     # Pets.pet_publisher = request.session.user_name
-#                     # Pets.pet_owner = request.session.user_name
-#                     Pet.save()
-#                     messages.success(request, '上傳成功')
-#                     upload_form = UploadForm() # 清空 form
-#                     # return redirect('/')
-#                     return redirect('home:animal_id', animal_id=Pet.id)
-#                 # upload_form.save()
-#                 # return redirect('/')
-#         upload_form = UploadForm()
-#         return render(request, 'pet/uploadAnimal.html', locals())
-#         # return redirect('/')
-#         # return HttpResponse("<p>資料新增成功！</p>")
-#     else:
-#         # return render(request, 'registration/login.html')
-#         return redirect('/account/login') 
-
 #顯示寵物細節
 def detailAnimal(request, id): 
     pet = get_object_or_404(Pet, id=id)
     return render(request, 'pet/detailAnimal.html', locals())
 
+def update_Json_To_DB(request):
+    #以下為json塞入DB
+    url = "http://163.29.157.32:8080/dataset/6a3e862a-e1cb-4e44-b989-d35609559463/resource/f4a75ba9-7721-4363-884d-c3820b0b917c/download/363b8cdd1d2742768af9e47ae54a09c2.json"
+    data = requests.get(url).json()
+    
+    count = 0;
+    for item in data:
+        pet = Shelter() #需要import
+        if count  ==10 :
+            break
+        pet.Name = item['Name']
+        pet.Sex = item['Sex']
+        pet.Type = item['Type']
+        pet.Build = item['Build']
+        pet.Age = item['Age']
+        pet.Variety = item['Variety']
+        pet.Reason = item['Reason']
+        pet.AcceptNum = item['AcceptNum']
+        pet.ChipNum = item['ChipNum']
+        pet.IsSterilization = item['IsSterilization']
+        pet.HairType = item['HairType']
+        pet.Note = item['Note']
+        pet.Resettlement = item['Resettlement']
+        pet.Phone = item['Phone']
+        pet.Email = item['Email']
+        pet.ChildreAnlong = item['ChildreAnlong']
+        pet.AnimalAnlong = item['AnimalAnlong']
+        pet.Bodyweight = item['Bodyweight']
+        pet.ImageName = item['ImageName']
+
+        test = item['Resettlement']
+        if check_id(pet.AcceptNum):
+            pet.save()
+        count+=1
+    return render(request, 'pet/update.html',{'message' : "成功"} )
+
+def check_id(input_id):
+    try:
+        get_id =  Shelter.objects.get(AcceptNum)
+        #print(get_id,"已經有了!")
+        return False #有get的到代表已經有資料了
+    except:
+        #print(get_id,"可以存")
+        return True
