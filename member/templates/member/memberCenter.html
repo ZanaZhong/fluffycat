@@ -1,9 +1,12 @@
 {% extends "member_base.html" %}
 {% block content %}
+{% if message %}
+  <div class="alert alert-warning">{{ message }}</div>
+{% endif %}
   <h3>個人資料</h3>
   <p>姓名: {{member.name}} </p>
   <p>性別: {{member.get_sex_display}} </p>
   <p>信箱: {{member.email}}</p>
   <p>address: {{member.address}}</p>
-  <a href="#" class="btn btn-primary">Detail</a>
+  <a href="{% url 'member:editMember' %}" class="btn btn-primary">編輯</a>
 {% endblock %}

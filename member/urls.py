@@ -19,6 +19,9 @@ from django.urls import path
 from . import views
 app_name = 'member'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('center/', views.index, name='index'),
     path('setpwd/', views.setpassword, name='setpassword'),
+    path('editmem/', views.editMember, name='editMember'),
+    path('upload/', views.uploadAnimal, name='uploadAnimal'),
+    path('detail<int:id>', views.detailAnimal, name='animal_id'),
 ]

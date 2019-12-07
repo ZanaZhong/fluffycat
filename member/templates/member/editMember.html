@@ -1,0 +1,29 @@
+{% extends "member_base.html" %}
+{% block content %}
+<h3>修改個人資料</h3>
+<form class="form-edit" action="{% url 'member:editMember' %}" method="POST">
+  {% csrf_token %} 
+  <p>姓名: </p>
+  <input type="text" name="member-name" value="{{member.name}}">
+  <p>性別: </p>
+  {% if member.sex == "female" %}
+    <input type="radio" id="sex-male" name="member-sex" value="male" />男
+    <input type="radio" id="sex-female" name="member-sex" value="female" checked="checked"/>女
+  {% else %}
+    <input type="radio" id="sex-male" name="member-sex" value="male" checked="checked"/>男
+    <input type="radio" id="sex-female" name="member-sex" value="female"/>女
+  {% endif %}
+  <!-- <select>
+    <option></option>
+  </select> -->
+  <!-- <input type="text" name="member-sex" value="{{member.get_sex_display}}"> -->
+  <p>信箱:</p>
+  <input type="text" name="member-email" value="{{member.email}}">
+  <p>address:</p>
+  <input type="text" name="member-address" value="{{member.address}}">
+
+  <button type="submit" class="btn btn-primary pull-right">確定</button>
+</form>
+  
+  
+{% endblock %}
