@@ -12,9 +12,9 @@ import requests
 def index(request):
     try:
         pet = Pet.objects
-        return render(request,'pet/index.html',{'pet' : pet} )
+        return render(request,'pet/index.html', {'pet' : pet} )
     except:       
-        return render(request, 'pet/index.html',{'errormsg' : '沒傳到啦幹'})
+        return render(request, 'pet/index.html', {'errormsg' : '沒傳到啦幹'})
 
 # TODO LIST 送養人要存 其他自己記
 def uploadAnimal(request):
@@ -44,7 +44,7 @@ def uploadAnimal(request):
                 addPet.photo = photo
 
                 addPet.save()
-                return render(request, 'pet/uploadAnimal.html') 
+                return render(request, 'pet/uploadAnimal.html', {'message': '上傳完成'}) 
             except Exception as err:
                 return render(request, 'pet/uploadAnimal.html', {'errormsg':'請上傳圖片'})
         return render(request, 'pet/uploadAnimal.html') 
@@ -96,7 +96,8 @@ def uploadAnimal(request):
 #         # return render(request, 'registration/login.html')
 #         return redirect('/account/login') 
 
-def detailAnimal(request, id): #顯示寵物細節,已領養 或 登入者就是寵物擁有者時,沒有領養按鈕
+#顯示寵物細節
+def detailAnimal(request, id): 
     pet = get_object_or_404(Pet, id=id)
     return render(request, 'pet/detailAnimal.html', locals())
 
