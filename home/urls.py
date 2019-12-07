@@ -20,7 +20,7 @@ from . import views
 app_name = 'home'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('upload', views.uploadAnimal, name='uploadAnimal'),
+    # path('upload', views.uploadAnimal, name='uploadAnimal'),
     path('detail<int:id>', views.detailAnimal, name='animal_id'),
     path('update/', views.update_Json_To_DB, name = "更新DB"),
 ]
