@@ -1,27 +1,38 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>{% block title %} {% endblock %}</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-light align-items-end flex-column">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
-      <ul class="navbar-nav text-right">
-         <!--  <li class="nav-item active">
-              <a class="nav-link" href="#">登入</a>
-          </li> -->
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'home:index' %}">返回</a>
-        </li>
-
-        </li>
-      </ul>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <a class="nav-link" href="{% url 'home:index' %}">返回</a>
+    <div class="container">
+      <h2>會員中心</h2>
+      <p>profil pic</p>
+      <!-- <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="{% url 'member:index'%}">個人資料</a></li>
+        <li><a data-toggle="tab" href="{% url 'member:setpassword'%}">修改密碼</a></li>
+        <li><a data-toggle="tab" href="#adopt-list">查看認養清單</a></li>
+        <li><a data-toggle="tab" href="#menu3">頁籤 3</a></li>
+      </ul> -->
+      <div class="contenter">
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'member:index'%}">個人資料</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'member:setpassword'%}">修改密碼</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">查看認養清單</a>
+          </li>
+        </ul>
+      </div>
+    {% block content %}
+    {% endblock %}
     </div>
-    <a class="navbar-brand mx-auto" href="{% url 'home:index' %}" style="font-size: 40px; margin-bottom: 10px;">會員中心</a>
-  </nav>
-</body>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
 </html>
