@@ -82,7 +82,8 @@
         <p>品種: {{pet.breed}} </p>
         <p>性別: {{pet.get_sex_display}} </p>
         <p>所在地: {{pet.get_location_display}}</p>
-        <a href="#" class="btn btn-primary">Detail</a>
+        <!-- to coco -->
+        <a href="{{ pet.get_absolute_url }}" class="btn btn-primary">認識我</a>
       </div>
     </div>
     {% endfor %}

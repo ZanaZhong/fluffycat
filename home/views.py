@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .forms import UploadForm
 from .models import Pet, Shelter
@@ -16,46 +16,47 @@ def index(request):
     except:       
         return render(request, 'pet/index.html', {'errormsg' : '沒傳到啦幹'})
 
-# TODO LIST 送養人要存 其他自己記
-def uploadAnimal(request):
-    if request.session.get('is_login', None): 
-        if request.method == 'POST':
-            #chipNumber = request.POST['d']
-            animalType = request.POST['種類']
-            breed = request.POST['品種']
-            age = request.POST['年齡']
-            sex = request.POST['性別'] 
-            location = request.POST['來源地']
-            health = request.POST['健康情況']
-            note = request.POST['備註']
-            # state = request.POST['認養狀態']
+# # TODO LIST 送養人要存 其他自己記
+# def uploadAnimal(request):
+#     if request.session.get('is_login', None): 
+#         if request.method == 'POST':
+#             #chipNumber = request.POST['d']
+#             animalType = request.POST['種類']
+#             breed = request.POST['品種']
+#             age = request.POST['年齡']
+#             sex = request.POST['性別'] 
+#             location = request.POST['來源地']
+#             health = request.POST['健康情況']
+#             note = request.POST['備註']
+#             # state = request.POST['認養狀態']
 
-            try:
-                photo = request.FILES['圖片'] 
-                print(photo)
-                addPet = Pet() #需要import
-                #addPet.animalType = animalType   #資料庫的animal_id = 使用者輸入的animal
-                addPet.breed = breed
-                #addPet.age = age
-                #addPet.sex = sex
-                #addPet.location = location
-                addPet.health = health
-                addPet.note = note
-                addPet.photo = photo
+#             try:
+#                 photo = request.FILES['圖片'] 
+#                 print(photo)
+#                 addPet = Pet() #需要import
+#                 #addPet.animalType = animalType   #資料庫的animal_id = 使用者輸入的animal
+#                 addPet.breed = breed
+#                 #addPet.age = age
+#                 #addPet.sex = sex
+#                 #addPet.location = location
+#                 addPet.health = health
+#                 addPet.note = note
+#                 addPet.photo = photo
 
-                addPet.save()
-                return render(request, 'pet/uploadAnimal.html', {'message': '上傳完成'}) 
-            except Exception as err:
-                return render(request, 'pet/uploadAnimal.html', {'errormsg':'請上傳圖片'})
-        return render(request, 'pet/uploadAnimal.html') 
+#                 addPet.save()
+#                 return render(request, 'pet/uploadAnimal.html', {'message': '上傳完成'}) 
+#             except Exception as err:
+#                 return render(request, 'pet/uploadAnimal.html', {'errormsg':'請上傳圖片'})
+#         return render(request, 'pet/uploadAnimal.html') 
 
-    else:
-        return redirect('/account/login') 
+#     else:
+#         return redirect('/account/login') 
 
-#顯示寵物細節
+# to co co 
+#顯示寵物細節 
 def detailAnimal(request, id): 
     pet = get_object_or_404(Pet, id=id)
-    return render(request, 'pet/detailAnimal.html', locals())
+    return render(request, 'pet/detailAnimal.html', {'pet_list':pet})
 
 def update_Json_To_DB(request):
     #以下為json塞入DB

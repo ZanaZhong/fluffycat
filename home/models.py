@@ -47,7 +47,7 @@ class Pet(models.Model):
     )
     sex_choice = (
         ('male','公'),
-        ('Female','母'),
+        ('female','母'),
     )
     area_choice = (
         (0, '台北市'),
@@ -97,6 +97,7 @@ class Pet(models.Model):
     def get_absolute_url(self):
         return reverse("home:animal_id", kwargs={"id": self.id})
 
+# to coco 
 @admin.register(Pet)
 class PetAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Pet._meta.fields]

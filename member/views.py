@@ -85,11 +85,11 @@ def uploadAnimal(request):
                 photo = request.FILES['圖片'] 
                 print(photo)
                 addPet = Pet() #需要import
-                #addPet.animalType = animalType   #資料庫的animal_id = 使用者輸入的animal
+                addPet.animalType = animalType   #資料庫的animal_id = 使用者輸入的animal
                 addPet.breed = breed
-                #addPet.age = age
-                #addPet.sex = sex
-                #addPet.location = location
+                addPet.age = age
+                addPet.sex = sex
+                addPet.location = location
                 addPet.health = health
                 addPet.note = note
                 addPet.photo = photo
