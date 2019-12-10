@@ -9,6 +9,7 @@
   </head>
   <body>
     <nav>
+
       <div class="profile-pic">
         {% if member.sex == "female" %}
           <img src="{% static 'img/woman.svg' %}">
@@ -18,30 +19,29 @@
       </div>
     </nav>
     
+    <!-- <h3>會員中心</h3>  -->
     <a class="nav-link" href="{% url 'home:index' %}">返回</a>
+    <div class="member-nav">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'member:index'%}">個人資料</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'member:setpassword'%}">修改密碼</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">查看認養清單</a>
+        </li>
+      </ul>
+    </div>
     <div class="container">
-      <h2>會員中心</h2>
-      
-      
       <!-- <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="{% url 'member:index'%}">個人資料</a></li>
         <li><a data-toggle="tab" href="{% url 'member:setpassword'%}">修改密碼</a></li>
         <li><a data-toggle="tab" href="#adopt-list">查看認養清單</a></li>
         <li><a data-toggle="tab" href="#menu3">頁籤 3</a></li>
       </ul> -->
-      <div class="contenter">
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <a class="nav-link active" href="{% url 'member:index'%}">個人資料</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'member:setpassword'%}">修改密碼</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">查看認養清單</a>
-          </li>
-        </ul>
-      </div>
+      
     {% block content %}
     {% endblock %}
     </div>
