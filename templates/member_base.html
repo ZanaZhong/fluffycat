@@ -4,12 +4,25 @@
     <meta charset="utf-8">
     <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    {% load staticfiles %} 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/member.css' %}">
   </head>
   <body>
+    <nav>
+      <div class="profile-pic">
+        {% if member.sex == "female" %}
+          <img src="{% static 'img/woman.svg' %}">
+        {% else %}
+          <img src="{% static 'img/man.svg' %}">
+        {% endif %}
+      </div>
+    </nav>
+    
     <a class="nav-link" href="{% url 'home:index' %}">返回</a>
     <div class="container">
       <h2>會員中心</h2>
-      <p>profil pic</p>
+      
+      
       <!-- <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="{% url 'member:index'%}">個人資料</a></li>
         <li><a data-toggle="tab" href="{% url 'member:setpassword'%}">修改密碼</a></li>

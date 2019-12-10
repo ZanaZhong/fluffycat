@@ -14,6 +14,7 @@ def index(request):
 
 def setpassword(request):
     #檢查session確定是否登入，不允許重複登入
+    member = Account.objects.get(account=request.session['user_account'])
     if request.session.get('is_login', None):
         if request.method == 'POST':  
             set_pwd_form = PasswordForm(request.POST)
@@ -22,8 +23,8 @@ def setpassword(request):
                 newpwd = set_pwd_form.cleaned_data['newpassword']
                 checknewpwd = set_pwd_form.cleaned_data['checknewpassword']
 
-                user = Account.objects.get(account=request.session['user_account'])
-                old_pwd = user.password
+                member = Account.objects.get(account=request.session['user_account'])
+                old_pwd = member.password
                 
                 #若輸入的舊密碼不相符
                 if hash_code(enterpwd) != old_pwd :
@@ -33,13 +34,13 @@ def setpassword(request):
                     if newpwd != checknewpwd: 
                         message = "兩次輸入的密碼不同!"
                         return render(request, 'member/setpwd.html', locals())
-                    user.password = hash_code(newpwd)
-                    user.save()
+                    member.password = hash_code(newpwd)
+                    member.save()
                     message = "修改成功"
                     return render(request, 'member/setpwd.html', locals())
         set_pwd_form = PasswordForm()
         # return redirect('member')
-        return render(request, 'member/setpwd.html', locals())
+        return render(request, 'member/setpwd.html', {'member' : member, 'set_pwd_form': set_pwd_form} )
     else:
         return redirect('/account/login')
 
