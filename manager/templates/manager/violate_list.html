@@ -1,0 +1,59 @@
+{% extends "manager_base.html" %}
+{% block content %}
+{% if message %}
+  <div class="alert alert-warning">{{ message }}</div>
+{% endif %}
+ <table class="table" id="listTable">
+    <caption>List of users</caption>
+    <thead>
+      <tr>
+        <th scope="col">檢舉人</th>
+        <th scope="col">違規事項</th>
+        <th scope="col">違規者</th>
+        <th scope="col">違規寵物ID</th>
+        <th scope="col">連結</th>
+
+      </tr>
+    </thead>
+     {% for i in violate_data %}
+      <tbody>
+        <tr>
+          
+          <td>{{i.reportName}}</td>
+          <td>{{i.violateList}}</td>
+          <td>{{i.voilateName}}</td>
+          <td>{{i.voilatePet.id}}</td>
+          <td><a href="/detail/requirment/{{i.voilatePet.id}}" class="btn btn-primary">查看</a> </td>
+
+        </tr>
+    {% endfor %}
+
+
+
+
+{% endblock %}
+
+
+
+
+<!--
+
+	<div class="row">
+	{% for i in violate_data %}
+      <div class="card">
+        <div class="card-header">
+          #
+        </div>
+        <div style="height:12rem; margin: auto;">
+          <img src="{{ i.voilatePet.photo.url}}" class=" " alt="..." style="height: inherit; max-width: 100%;">
+        </div>
+        <div class="card-body">
+          <p>檢舉人: {{i.reportName}} </p>
+		  <p>違規事項: {{i.violateList}} </p>
+		  <p>違規者: {{i.voilateName}}</p>
+		  <p>違規寵物id: {{i.voilatePet.id}}</p>
+          <a href="/detail/requirment/{{i.voilatePet.id}}" class="btn btn-primary">查看</a>
+        </div>
+      </div>
+      {% endfor %}
+      -->

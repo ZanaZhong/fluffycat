@@ -1,0 +1,39 @@
+.adopt-container {
+    padding: 0px 50px 0px 50px;
+}
+
+.navbar {
+    padding: 0px 50px 0px 50px;
+}
+
+/*.text{
+    width:500%;
+}
+.text-select{
+    width:500px; 
+    height:60px;
+    line-height: 55px;
+    font-size: 1.5rem;
+    border: 1px solid #000;
+    color: #5f5f5f;
+}
+*/
+.adopt-list {
+    margin: 20px 0px;
+}
+
+.form-title {
+    text-align: right;
+}
+
+.pet-title, .pet-index {
+    padding-right: 0px;
+}
+
+
+/*upload*/
+#chipNum , #breed{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
