@@ -28,13 +28,16 @@ def login(request):
             password = login_form.cleaned_data['password'] 
             try:
                 user = Account.objects.get(account=useraccount)
-                if user.password == hash_code(password): #密文處理
+                if user.password == hash_code(password) and user.suspend == False: #密文處理
                     #使用session寫入登入者資料
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_account'] = user.account
                     request.session['user_name'] = user.name
                     message = "登入成功"
+                    if user.role == "admin":
+                        request.session['role'] = "admin"
+                        return redirect('manager:index')
                     return redirect('/')
                 else:
                     message = "密碼不正確"
