@@ -2,92 +2,122 @@
 {% block title %} Animals {% endblock %}
 {% block content %}
 <!-- {% load staticfiles %}  -->
-<div class="jumbotron">
-  <div class="container text-center">
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-      <label class="form-check-label" for="inlineRadio1">狗狗</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-      <label class="form-check-label" for="inlineRadio2">貓貓</label>
-    </div>
-    <select class="mdb-select" searchable="Search here..">
-      <option value="1" disabled selected>Choose your option</option>
-      <option value="2">example 1</option>
-      <option value="3">example 2</option>
-      <option value="4">example 4</option>
-    </select>
-  </div>
-</div>
 
+{% csrf_token %}
 <div class="container-fluid bg-3 text-center" style="padding: 0px 50px 0px 50px;"> 
-  <div class="row">
-    <div class="card col-sm-3" style="width: 18rem;">
-      <img src="{% static 'img/pearl.png' %}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-    <div class="card col-sm-3" style="width: 18rem;">
-      <img src="https://placehold.it/150x80?text=IMAGE" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-    <div class="card col-sm-3" style="width: 18rem;">
-      <img src="https://placehold.it/150x80?text=IMAGE" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-</div><br>
-<div class="container-fluid bg-3" style="padding: 0px 50px 0px 50px;"> 
-  {{ errormsg }}<br>
-  <div class="row">
-    {% for pet in pet.all %}
-    <!-- <div class="card">
-      <div class="card-header">
-        #
-      </div>
-      <div style="height:13rem;">
-        <img src="{{ pet.photo.url}}" class="card-img-top" alt="..." style="height: inherit;">
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p>品種: {{pet.breed}} </p>
-        <p>性別: {{pet.get_sex_display}} </p>
-        <p>所在地: {{pet.get_location_display}}</p>
-        <a href="#" class="btn btn-primary">Detail</a>
-      </div>
-    </div>
- -->
+  <div class="select-field text-center">
+    <div class="title">找什麼嗎 ?</div>
+    <form id="form" action="{% url 'home:index' %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group row">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="row">
+            <label for="select_type" class="col-lg-4 col-md-5 col-sm-5 col-form-label">種類：</label>
+            <div class="col-lg-6 col-md-7 col-sm-7">
+              <select class="form-control" id="select_type" name = "select_type">
+                <option value="999" disabled selected>不選擇</option>
+                <option value=0>狗狗</option>
+                <option value=1>貓貓</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-    <div class="card">
-      <div class="card-header">
-        #
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="row">
+            <label for="select_sex" class="col-lg-4 col-md-5 col-sm-5 col-form-label">性別：</label>
+            <div class="col-lg-6 col-md-7 col-sm-7">
+              <select class="form-control" id="select_sex" name = "select_sex">
+                <option value="999" disabled selected>不選擇</option>
+                <option value=0>公</option>
+                <option value=1>母</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <div class="row">
+            <label for="select_location" class="col-lg-4 col-md-5 col-sm-5 col-form-label">地點：</label>
+            <div class="col-lg-7 col-md-7 col-sm-7">
+              <select class="form-control" id="select_location" name = "select_location">
+                <option value="999" disabled selected>不選擇</option>
+                <option value=0>台北市</option>
+                <option value=1>新北市</option>
+                <option value=2>桃園市</option>
+                <option value=3>新竹縣</option>
+                <option value=4>新竹市</option>
+                <option value=5>苗栗縣</option>
+                <option value=6>台中市</option>
+                <option value=7>彰化縣</option>
+                <option value=8>南投縣</option>
+                <option value=9>雲林縣</option>
+                <option value=10>嘉義縣</option>
+                <option value=11>嘉義市</option>
+                <option value=12>台南市</option>
+                <option value=13>高雄市</option>
+                <option value=14>屏東縣</option>
+                <option value=15>台東縣</option>
+                <option value=16>花蓮縣</option>
+                <option value=17>宜蘭縣</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-12">
+          <button type="submit" class="btn btn-outline-secondary pull-right">查詢</button>
+        </div>
       </div>
-      <div style="height:12rem; margin: auto;">
-        <img src="{{ pet.photo.url}}" class=" " alt="..." style="height: inherit; max-width: 100%;">
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p>品種: {{pet.breed}} </p>
-        <p>性別: {{pet.get_sex_display}} </p>
-        <p>所在地: {{pet.get_location_display}}</p>
-        <!-- to coco -->
-        <a href="{{ pet.get_absolute_url }}" class="btn btn-primary">認識我</a>
-      </div>
-    </div>
-    {% endfor %}
+    </form>
   </div>
+    <div class="title">動物認領養</div>
+  <!-- <div class="container-fluid bg-3" style="padding: 0px 50px 0px 50px;">  -->
+    {% if errormsg %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ errormsg }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+    <div class="row">
+      {% for pet in pet.all %}
+      <!-- <div class="card">
+        <div class="card-header">
+          #
+        </div>
+        <div style="height:13rem;">
+          <img src="{{ pet.photo.url}}" class="card-img-top" alt="..." style="height: inherit;">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p>品種: {{pet.breed}} </p>
+          <p>性別: {{pet.get_sex_display}} </p>
+          <p>所在地: {{pet.get_location_display}}</p>
+          <a href="#" class="btn btn-primary">Detail</a>
+        </div>
+      </div>
+   -->
+
+      <div class="card">
+        <div class="card-header">
+          #
+        </div>
+        <div style="height:12rem; margin: auto;">
+          <img src="{{ pet.photo.url}}" class=" " alt="..." style="height: inherit; max-width: 100%;">
+        </div>
+        <div class="card-body">
+          <!-- <h5 class="card-title">Card title</h5> -->
+          <p>品種: {{pet.breed}} </p>
+          <p>性別: {{pet.get_sex_display}} </p>
+          <p>所在地: {{pet.get_location_display}}</p>
+          <a href="{{ pet.get_absolute_url }}" class="btn btn-primary">認識我</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  <!-- </div> -->
 </div>
 
 {% endblock %}

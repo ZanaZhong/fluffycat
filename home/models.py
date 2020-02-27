@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.urls import reverse
+from account.models import Account
 
 # Create your models here.
 class Shelter(models.Model):
@@ -91,6 +92,7 @@ class Pet(models.Model):
     state = models.IntegerField('領養狀態', choices=pet_status_choice, default=0)
     ctime = models.DateTimeField(auto_now_add=True)
     petOwner = models.CharField('送養人', max_length=20)
+    petPublisher = models.ForeignKey(Account, on_delete=models.CASCADE)
 
     # def __unicode__(self):
     #     return self.ctime

@@ -10,12 +10,31 @@ import requests
 
 # Create your views here.
 def index(request):
+    pet = Pet.objects
+    if request.method == 'POST':
+        select_type = request.POST.get('select_type')
+        select_sex = request.POST.get('select_sex')
+        select_location = request.POST.get('select_location')
+        pet = Search_Query(select_type,select_sex,select_location)
+        if pet.count() == 0:   #搜尋結果為空
+            return render(request, 'pet/index.html',{'errormsg' : '查無資訊'})
     try:
-        pet = Pet.objects
-        return render(request,'pet/index.html', {'pet' : pet} )
+        return render(request,'pet/index.html',{'pet' : pet} )
     except:       
-        return render(request, 'pet/index.html', {'errormsg' : '沒傳到啦幹'})
+        return render(request, 'pet/index.html',{'errormsg' : '沒傳到啦幹'})
 
+def Search_Query(select_type,select_sex,select_location):   #QuerySet查詢
+    pet = Pet.objects
+    if select_type != None:
+        select_type = int(select_type) 
+        pet =  pet.filter(animalType = select_type)
+    if  select_sex != None:
+        select_sex = int(select_sex)
+        pet =  pet.filter(sex = select_sex) 
+    if select_location !=None:
+        select_location = int(select_location)
+        pet =  pet.filter(location = select_location) 
+    return pet
 # # TODO LIST 送養人要存 其他自己記
 # def uploadAnimal(request):
 #     if request.session.get('is_login', None): 
@@ -52,7 +71,6 @@ def index(request):
 #     else:
 #         return redirect('/account/login') 
 
-# to co co 
 #顯示寵物細節 
 def detailAnimal(request, id): 
     pet = get_object_or_404(Pet, id=id)
