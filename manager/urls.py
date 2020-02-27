@@ -20,9 +20,8 @@ from . import views
 app_name = 'manager'
 urlpatterns = [
     path('boss/', views.index, name='index'),
+    path('violate_list/',views.violate_list, name = 'violate_list'),
     path('aList/', views.accountList, name='accountList'),
     path('aList/del/', views.deleteAccount, name='deleteAccount'),
-    path('violate_list/',views.violate_list, name = 'violate_list'),
-
     path('aList/suspend/', views.suspendAccount, name='suspendAccount'),
 ]

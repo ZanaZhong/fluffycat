@@ -8,7 +8,7 @@
   {% csrf_token %}
   <a href="#" class="btn btn-outline-dark rmValue">刪除</a>
   <a href="#" class="btn btn-outline-warning addSuspend">停權</a>
-  <table class="table" id="listTable">
+  <table class="table table-hover" id="listTable">
     <caption>List of users</caption>
     <thead>
       <tr>
@@ -19,32 +19,33 @@
         <th scope="col">性別</th>
         <th scope="col">信箱</th>
         <th scope="col">地址</th>
-        <th scope="col">功能</th>
+        <!-- <th scope="col">功能</th> -->
       </tr>
     </thead>
     {% for accountList in accountList.all %}
       <tbody>
         {% if accountList.suspend == True %}
-          <tr class="table-secondary">
+          <tr class="table-secondary" title="已被停權">
+        {% elif accountList.get_role_display == '管理員' %}
+          <tr style="color: #1bc1ab;" title="{{ accountList.get_role_display }}">
         {% else %}
-          <tr>
+          <tr title="{{ accountList.get_role_display }}">
         {% endif %}
-          <th scope="row" for="u{{ accountList.id }}">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input accountId" type="checkbox" id="u{{ accountList.id }}" value="{{ accountList.id }}" name="accountId">
-            </div>
-          </th>
-          <td>{{ forloop.counter }}</td>
-          <td>{{ accountList.name }}</td>
-          <td>{{ accountList.account }}</td>
-          <td>{{ accountList.get_sex_display }}</td>
-          <td>{{ accountList.email }}</td>
-          <td>{{ accountList.address }}</td>
-          <td>
+        <th scope="row" for="u{{ accountList.id }}">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input accountId" type="checkbox" id="u{{ accountList.id }}" value="{{ accountList.id }}" name="accountId">
+          </div>
+        </th>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ accountList.name }}</td>
+        <td>{{ accountList.account }}</td>
+        <td>{{ accountList.get_sex_display }}</td>
+        <td>{{ accountList.email }}</td>
+        <td>{{ accountList.address }}</td>
+<!--           <td>
             <button class="btnSelect btn btn-outline-info">test</button>
-            <!-- <a href="#" class="btn btn-outline-success editAdmin" id="editAdmin">編輯</a> -->
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#editAdmin">編輯</button>
-          </td>
+          </td> -->
         </tr>
     {% endfor %}
     </tbody>

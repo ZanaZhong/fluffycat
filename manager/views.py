@@ -16,14 +16,16 @@ def index(request):
 
 
 def accountList(request):
-    # return HttpResponse("Hello, welcome to my website")
-    try:
-        AccountList = Account.objects.all()
-        print(list(AccountList))
-        # print(json.dumps(AccountList))
-        return render(request,'manager/accountList.html', {'accountList' : AccountList} )
-    except:
-        return render(request, 'manager/accountList.html', {'errormsg' : '沒傳到啦'})
+    if check_Authority(request):
+        try:
+            AccountList = Account.objects.all()
+            if Account.objects.count() == 0:
+                return render(request,'manager/accountList.html', { 'message' : "尚無資料"})
+            return render(request,'manager/accountList.html', {'accountList' : AccountList} )
+        except:
+            return render(request, 'manager/accountList.html', {'errormsg' : '沒傳到啦'})
+    else:
+        return render(request,'manager/error.html' )
 
 @csrf_exempt
 def suspendAccount(request):
@@ -61,11 +63,16 @@ def deleteAccount(request):
 
 #檢舉清單
 def violate_list(request):
-	violate_data = Violate.objects.all()
-	print(violate_data)
-	if Violate.objects.count() == 0:  #沒資料
-		return render(request,'manager/violate_list.html', { 'message' : "尚無資料"})
-	return render(request,'manager/violate_list.html', { 'violate_data' : violate_data})
+    violate_data = Violate.objects.all()
+    print(violate_data)
+    if Violate.objects.count() == 0:  #沒資料
+        return render(request,'manager/violate_list.html', { 'message' : "尚無資料"})
+    return render(request,'manager/violate_list.html', { 'violate_data' : violate_data})
 
 
-
+def check_Authority(request):
+    try:
+        User_ID = request.session['role']  #
+        return True
+    except:
+        return False

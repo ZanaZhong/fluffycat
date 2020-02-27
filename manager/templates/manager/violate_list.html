@@ -1,59 +1,41 @@
 {% extends "manager_base.html" %}
 {% block content %}
-{% if message %}
-  <div class="alert alert-warning">{{ message }}</div>
-{% endif %}
- <table class="table" id="listTable">
-    <caption>List of users</caption>
-    <thead>
-      <tr>
-        <th scope="col">檢舉人</th>
-        <th scope="col">違規事項</th>
-        <th scope="col">違規者</th>
-        <th scope="col">違規寵物ID</th>
-        <th scope="col">連結</th>
+{% if message %} 
+  <div class="alert alert-warning">{{ message }}</div> 
+{% endif %} 
+{% csrf_token %}  
+<form method="POST" class="accountForm">  
+  {% csrf_token %}  
+  <a href="#" class="btn btn-outline-dark rmValue2" id="test">刪除</a>  
+  <table class="table" id="listTable">  
+    <caption>List of violates</caption>  
+    <thead>  
+      <tr> 
+        <th scope="col"></th> 
+        <th scope="col">#</th> 
+        <th scope="col">檢舉人</th> 
+        <th scope="col">違規事項</th> 
+        <th scope="col">違規者</th> 
+        <th scope="col">違規寵物ID</th> 
+        <th scope="col">連結</th> 
+ 
+      </tr> 
+    </thead> 
+     {% for i in violate_data %}  
+      <tbody>  
+        <tr>  
+          <th scope="row" for="u{{ i.id }}"> 
+            <div class="form-check form-check-inline"> 
+              <input class="form-check-input violateID" type="checkbox" id="u{{ i.id }}" value="{{ i.id }}" name="violateID"> 
+            </div> 
+          </th> 
+          <td>{{ forloop.counter }}</td>  
+          <td>{{i.reportName}}</td>  
+          <td>{{i.violateList}}</td>  
+          <td>{{i.voilateName}}</td>  
+          <td>{{i.voilatePet.id}}</td>  
+          <td><a href="/detail/detailAnimal/{{i.voilatePet.id}}/" class="btn btn-primary">查看</a> </td> 
+        </tr>  
+    {% endfor %}  
 
-      </tr>
-    </thead>
-     {% for i in violate_data %}
-      <tbody>
-        <tr>
-          
-          <td>{{i.reportName}}</td>
-          <td>{{i.violateList}}</td>
-          <td>{{i.voilateName}}</td>
-          <td>{{i.voilatePet.id}}</td>
-          <td><a href="/detail/requirment/{{i.voilatePet.id}}" class="btn btn-primary">查看</a> </td>
-
-        </tr>
-    {% endfor %}
-
-
-
-
-{% endblock %}
-
-
-
-
-<!--
-
-	<div class="row">
-	{% for i in violate_data %}
-      <div class="card">
-        <div class="card-header">
-          #
-        </div>
-        <div style="height:12rem; margin: auto;">
-          <img src="{{ i.voilatePet.photo.url}}" class=" " alt="..." style="height: inherit; max-width: 100%;">
-        </div>
-        <div class="card-body">
-          <p>檢舉人: {{i.reportName}} </p>
-		  <p>違規事項: {{i.violateList}} </p>
-		  <p>違規者: {{i.voilateName}}</p>
-		  <p>違規寵物id: {{i.voilatePet.id}}</p>
-          <a href="/detail/requirment/{{i.voilatePet.id}}" class="btn btn-primary">查看</a>
-        </div>
-      </div>
-      {% endfor %}
-      -->
+{% endblock %} 
