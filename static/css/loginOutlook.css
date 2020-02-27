@@ -1,4 +1,4 @@
-html ,body, .container {
+html ,body {
     height: 100%;
 }
 body {
@@ -8,6 +8,10 @@ body {
   margin: auto 80px;
 }
 
+.container-fluid {
+  margin-top: 50px;
+}
+
 .right-card{
     padding-left: 30px;
     border-left: 1px solid white;
@@ -15,7 +19,7 @@ body {
 
 .input-field {
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
 }
 
 .input-field label{
@@ -23,18 +27,41 @@ body {
   margin: 0;
 }
 
-.input-field input[type=text], input[type=password] {
+.form-control:focus {
   background-color: transparent;
   border: none;
-
-  border-bottom: 1px solid white !important;
-  box-shadow: 0 0px 0 0 white !important;
-  color:#6a6f77;
-  outline:0;
+  border-bottom: 2px solid #4a4a4a;
 }
 
-input:focus{
-  border:1px solid #ff7496;
+.form-control {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  box-shadow: 0 0px 0 0 white !important;
+  color: #6a6f77;
+  outline: 0;
+  border-radius: 0rem;
+}
+
+.form-btn {
+  margin-top: 20px;
+}
+
+.back-btn {
+  color: gray;
+  transition: color 0.25s;
+}
+
+.back-btn:hover {
+  color: #0eb7da;
+  text-decoration: none;
+}
+
+.back-btn:hover::before {
+  text-decoration: none;
+/*  border-top-color: #0eb7da;
+  border-right-color: #0eb7da;*/
+  transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
 }
 /*.flex-center {
     display:flex;

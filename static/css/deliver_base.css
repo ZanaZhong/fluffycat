@@ -1,4 +1,16 @@
-.adopt-container {
+@font-face {
+  font-family: 'oxxo';
+  src: url('{% static 'TaipeiSansTCBeta-Light.ttf' %}');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family:oxxo, Material Icons, serif;
+  color: #707070;
+}
+
+.adopt-container, .upload-container {
     padding: 0px 50px 0px 50px;
 }
 
