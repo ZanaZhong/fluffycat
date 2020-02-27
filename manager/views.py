@@ -8,12 +8,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from member.models import Violate
 
-
-# Create your views here.
 def index(request):
     # return HttpResponse("Hello, welcome to my website")
-    return render(request,'manager/index.html')
-
+    # return render(request,'manager/index.html')
+    if check_Authority(request):
+        return redirect('/manager/violate_list')
+    else:
+        return render(request,'manager/error.html' )
 
 def accountList(request):
     if check_Authority(request):
